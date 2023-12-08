@@ -1,7 +1,7 @@
 package entities;
 
 public class Filiere {
-    private int idFiliere;
+    private Integer idFiliere;
     private String Code;
     private String libelle;
 
@@ -14,13 +14,15 @@ public class Filiere {
                 '}';
     }
 
-    public int getIdFiliere() {
+    public Integer getIdFiliere() {
         return idFiliere;
     }
 
-    public void setIdFiliere(int idFiliere) {
+    public void setIdFiliere(Integer idFiliere) {
         this.idFiliere = idFiliere;
     }
+
+
 
     public String getCode() {
         return Code;
@@ -41,7 +43,7 @@ public class Filiere {
     public Filiere() {
     }
 
-    public Filiere(int idFiliere, String code, String libelle) {
+    public Filiere(Integer idFiliere, String code, String libelle) {
         this.idFiliere = idFiliere;
         Code = code;
         this.libelle = libelle;
