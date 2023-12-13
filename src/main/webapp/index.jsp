@@ -20,7 +20,7 @@
         body {
             color: #566787;
             background: #f5f5f5;
-            background-image: url('./back1.jpg');
+            background-image: url('./b0.jpg');
             background-size:cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -245,26 +245,46 @@
         .modal form label {
             font-weight: normal;
         }
+        .custom-text {
+            font-size: smaller; /* or any other style you want to apply */
+            color: #888; /* for example, a muted color */
+        }
     </style>
 
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" >
-    <a class="navbar-brand">  Ecole Dashboard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">Ecole Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="etudiant">Etudiant</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="filiere">Filiere</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-</body>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="etudiant">Etudiant</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="filiere">Filiere</a>
+                </li>
+            </ul>
+
+            <div class="border p-3 rounded d-flex align-items-center">
+                <img src="./me1.jpg" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 15px;">
+
+                <div>
+                    <h10 class="mb-0 font-weight-bold text-uppercase text-primary">Ayoub Ajdour</h10><br>
+                    <small class="text-muted">Master's Student in DevOps and Cloud Computing</small>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        </div>
+    </nav>
+
+
+    </body>
 </html>

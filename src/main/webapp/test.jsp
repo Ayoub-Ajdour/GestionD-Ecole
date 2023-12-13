@@ -1,25 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Filiere</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
     <style>
         body {
             color: #566787;
             background: #f5f5f5;
             font-family: 'Varela Round', sans-serif;
+            background-image: url('./back3.jpg');
+            background-size:cover;
+            background-position: center;
+            background-repeat: no-repeat;
             font-size: 13px;
         }
         .table-responsive {
@@ -240,12 +241,16 @@
         .modal form label {
             font-weight: normal;
         }
+        .section {
+            flex: 1; /* Each section takes up equal space */
+            box-sizing: border-box;
+            padding: 5px;
+        }
     </style>
-
 </head>
-<body style="background-image: url('./2690553.jpg');">
+<body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-    <a class="navbar-brand">  Client Dashboard</a>
+    <a class="nav-link" href="index.jsp">  Ecole Dashboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -253,18 +258,128 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="./NewClient.html">New Client</a>
+                <a class="nav-link" href="etudiant">Etudiant</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./ListClient.html">List Client</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="./ReserveRoom.html">Reserve Room</a>
+                <a class="navbar-brand"><b>Filiere</b></a>
             </li>
         </ul>
-
     </div>
 </nav>
+<div class="container-xl" >
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Gestion <b>Filiere</b></h2>
+                    </div>
+
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert font-weight-bold text-center" role="alert">
+                </div>
+                <div class="row">
+                    <div class="section">
+
+                        <form method="post" action="filiere/save">
+                            <div class="col-sm-12 col-md-6 col-lg-4  mx-auto">
+                                <div class="form-group">
+                                    <label>ID :</label>
+                                    <input type="text" name="id" disabled="true" class="form-control" autocomplete="off" ng-disabled="submitted"
+                                           value="${filiereBean.filiere.idFiliere}">
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 mx-auto">
+                                        <div class="form-group">
+                                            <label>Code :</label>
+                                            <input type="text" name="code" class="form-control " required value="${filiereBean.filiere.code}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 mx-auto">
+                                        <div class="form-group">
+                                            <label>Libelle :</label>
+                                            <input type="text" name="libelle" class="form-control " required value="${filiereBean.filiere.libelle}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center">
+                                <br>
+                                <input type="submit" class="btn btn-dark"
+                                       value="${filiereBean.label}">
+                            </div>
+
+
+
+                        </form>
+
+                    </div>
+                    <div class="section">
+                        <table class="table table-striped table-hover"   id="eeee">
+                            <thead>
+                            <tr>
+                                <th>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
+                                </span>
+                                </th>
+                                <th>Id</th>
+                                <th>Code</th>
+
+                                <th>Libelle</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${filiereBean.filieres}" var="f">
+                            <tr>
+                                <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                                </td>
+                                <td>
+                                        ${f.idFiliere}
+                                </td>
+                                <td>
+                                        ${f.code}
+                                </td>
+                                <td>
+                                        ${f.libelle}
+                                </td>
+
+                                <td>
+                                    <a href="filiere/modify?id=${f.idFiliere}" class="edit" data-toggle="modal" ><i class="material-icons" data-toggle="tooltip" title="Edit" style="color: #FFD700;">&#xE254;</i></a>
+                                </td>
+                                <td>
+                                    <a href="#" class="delete" onclick="confirmDelete('${f.idFiliere}')">
+                                        <i class="material-icons" data-toggle="tooltip" title="Delete" style="color: #ff0000;">&#xE872;</i>
+                                    </a>            </td>
+                            </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
+            </div></div></div></div>
+
+<script>
+    function confirmDelete(fId) {
+        var confirmed = window.confirm("Êtes-vous sûr de le supprimer??");
+        if (confirmed) {
+            window.location.href = "filiere/delete?id=" + fId;
+        }
+    }
+</script>
 </body>
 </html>
+
+

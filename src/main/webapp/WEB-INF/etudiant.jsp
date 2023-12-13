@@ -17,6 +17,10 @@
             color: #566787;
             background: #f5f5f5;
             font-family: 'Varela Round', sans-serif;
+            background-image: url('./back2.jpg');
+            background-size:cover;
+            background-position: center;
+            background-repeat: no-repeat;
             font-size: 13px;
         }
         .table-responsive {
@@ -237,11 +241,16 @@
         .modal form label {
             font-weight: normal;
         }
+        .section {
+            flex: 1; /* Each section takes up equal space */
+            box-sizing: border-box;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-    <a class="navbar-brand">  Ecole Dashboard</a>
+    <a class="nav-link" href="index.jsp">  Ecole Dashboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -249,7 +258,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="etudiant">Etudiant</a>
+                <a class="navbar-brand"><b>Etudiant</b></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="filiere">Filiere</a>
@@ -257,96 +266,107 @@
         </ul>
     </div>
 </nav>
+<div class="container-xl" >
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Gestion <b>Etudiant</b></h2>
+                    </div>
 
-<form method="post" action="etudiant/save">
-    <fieldset>
-        <legend>Gestion Etudiant :</legend>
-        <table>
-            <tr>
-                <td>
-                    ID :
-                </td>
-                <td>
-                    <input type="text" name="idEtudiant" disabled="true"
-                           value="${etudiantBean.etudiant.idEtudiant}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    nom :
-                </td>
-                <td>
-                    <input type="text" name="nom"
-                           value="${etudiantBean.etudiant.nom}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    prenom :
-                </td>
-                <td>
-                    <input type="text" name="prenom"
-                           value="${etudiantBean.etudiant.prenom}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    CNE :
-                </td>
-                <td>
-                    <input type="text" name="cne"
-                           value="${etudiantBean.etudiant.cne}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Filiere :
-                </td>
-                <td>
-                    <select id="filiereBean" name="filiere">
-                        <c:forEach items="${filiereBean.filieres}" var="f">
-                            <option value="${f.idFiliere}">
-                                    ${f.code}
-                            </option>
-                        </c:forEach>
-                    </select>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit"
-                           value="${etudiantBean.getLabel()}">
-                </td>
-            </tr>
-        </table>
-    </fieldset>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert font-weight-bold text-center" role="alert">
+                </div>
+                <div class="row">
+                    <div class="section">
+
+                    <form method="post" action="etudiant/save">
+                        <div class="col-sm-12 col-md-6 col-lg-4  mx-auto">
+                            <div class="form-group">
+                                <label>ID :</label>
+                                    <input type="text" name="idEtudiant" disabled="true" class="form-control" autocomplete="off" ng-disabled="submitted"
+                                           value="${etudiantBean.etudiant.idEtudiant}">
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mx-auto">
+                                    <div class="form-group">
+                                        <label>Nom :</label>
+                                        <input type="text" name="nom" class="form-control " required value="${etudiantBean.etudiant.nom}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mx-auto">
+                                    <div class="form-group">
+                                        <label>Prenom :</label>
+                                        <input type="text" name="prenom" class="form-control " required value="${etudiantBean.etudiant.prenom}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mx-auto">
+                                    <div class="form-group">
+                                        <label>CNE :</label>
+                                        <input type="text" name="cne" class="form-control " required value="${etudiantBean.etudiant.cne}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mx-auto">
+                                    <div class="form-group">
+                                        <label>Filiere :</label>
+                                        <select id="filiereBean" name="filiere" required class="form-control">
+                                            <c:forEach items="${filiereBean.filieres}" var="f">
+                                                <option value="${f.idFiliere}">
+                                                        ${f.code}
+                                                </option>
+                                            </c:forEach>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <br>
+                            <input type="submit" class="btn btn-dark"
+                                   value="${etudiantBean.getLabel()}">
+                        </div>
+
+
+
 </form>
 
-<table>
-    <tr>
-        <td>
-            Id :
-        </td>
-        <td>
-            Nom :
-        </td>
-        <td>
-            Prenom :
-        </td>
-        <td>
-            CNE :
-        </td>
-        <td>
-            Filiere :
-        </td>
-        <td>
-            Modifier :
-        </td>
-        <td>
-            Supprimer :
-        </td>
-    </tr>
+                    </div>
+                    <div class="section">
+                        <table class="table table-striped table-hover"   id="eeee">
+                            <thead>
+                            <tr>
+                                <th>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
+                                </span>
+                                </th>
+                                <th>Id</th>
+                                <th>Nom</th>
+
+                                <th>Prenom</th>
+                                <th>CNE</th>
+                                <th>Filiere</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
     <c:forEach items="${etudiantBean.etudiants}" var="e">
         <tr>
+            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+            </td>
             <td>
                     ${e.idEtudiant}
             </td>
@@ -363,15 +383,29 @@
                     ${e.filiere.code}
             </td>
 
+
             <td>
-                <a href="etudiant/modify?id=${e.idEtudiant}">edit</a>
+                <a href="etudiant/modify?id=${e.idEtudiant}" class="edit" data-toggle="modal" ><i class="material-icons" data-toggle="tooltip" title="Edit" style="color: #FFD700;">&#xE254;</i></a>
             </td>
             <td>
-                <a href="etudiant/delete?id=${e.idEtudiant}">delete</a>
-            </td>
+                <a href="#" class="delete" onclick="confirmDelete('${e.idEtudiant}')">
+                    <i class="material-icons" data-toggle="tooltip" title="Delete" style="color: #ff0000;">&#xE872;</i>
+                </a>            </td>
         </tr>
     </c:forEach>
 </table>
+                    </div>
+                </div>
+            </div></div></div></div>
+
+<script>
+    function confirmDelete(studentId) {
+        var confirmed = window.confirm("Êtes-vous sûr de le supprimer??");
+        if (confirmed) {
+            window.location.href = "etudiant/delete?id=" + studentId;
+        }
+    }
+</script>
 </body>
 </html>
 
