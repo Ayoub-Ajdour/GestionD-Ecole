@@ -53,6 +53,7 @@ public class Etudiant {
         this.cne = cne;
     }
 
+
     public Filiere getFiliere() {
         return filiere;
     }

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -14,16 +13,12 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecole</title>
+    <title>Document</title>
 
     <style>
         body {
             color: #566787;
             background: #f5f5f5;
-            background-image: url('./back1.jpg');
-            background-size:cover;
-            background-position: center;
-            background-repeat: no-repeat;
             font-family: 'Varela Round', sans-serif;
             font-size: 13px;
         }
@@ -248,9 +243,9 @@
     </style>
 
 </head>
-<body>
+<body style="background-image: url('./2690553.jpg');">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-    <a class="navbar-brand">  Ecole Dashboard</a>
+    <a class="navbar-brand">  Client Dashboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -258,12 +253,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="etudiant">Etudiant</a>
+                <a class="nav-link" href="./NewClient.html">New Client</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="filiere">Filiere</a>
+                <a class="nav-link" href="./ListClient.html">List Client</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="./ReserveRoom.html">Reserve Room</a>
             </li>
         </ul>
+
     </div>
 </nav>
 </body>

@@ -1,4 +1,9 @@
 package service;
 
-public class EtudiantService {
+import entities.Etudiant;
+
+import java.util.List;
+
+public interface EtudiantService {
+    List<Etudiant> getSortedEtudiants();
 }
