@@ -14,11 +14,15 @@ import java.io.IOException;
 @WebServlet({"/filiere"})
 public class HomeServlet extends HttpServlet {
     public HomeServlet() {
+
     }
 
-    protected void doGet(jakarta.servlet.http.HttpServletRequest req, jakarta.servlet.http.HttpServletResponse resp) throws jakarta.servlet.ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         if (req.getSession().getAttribute("filiereBean") == null) {
+
             req.getSession().setAttribute("filiereBean", new FiliereBean());
+
         }
 
         req.getRequestDispatcher("/WEB-INF/filiere.jsp").forward(req, resp);

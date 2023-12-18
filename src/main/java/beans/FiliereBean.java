@@ -24,6 +24,7 @@ public class FiliereBean {
     }
 
     public List<Filiere> getFilieres() {
+
         return this.filiereService.getSortedFilieres();
     }
 

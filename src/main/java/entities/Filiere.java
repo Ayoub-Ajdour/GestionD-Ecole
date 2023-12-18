@@ -1,35 +1,34 @@
 package entities;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Filiere {
-    private Integer idFiliere;
-    private String Code;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "idFiliere", nullable = false)
+    private int idFiliere;
+    @Basic
+    @Column(name = "Code", nullable = false, length = 50)
+    private String code;
+    @Basic
+    @Column(name = "libelle", nullable = false, length = 50)
     private String libelle;
 
-    @Override
-    public String toString() {
-        return "Filiere{" +
-                "idFiliere=" + idFiliere +
-                ", Code='" + Code + '\'' +
-                ", libelle='" + libelle + '\'' +
-                '}';
-    }
-
-    public Integer getIdFiliere() {
+    public int getIdFiliere() {
         return idFiliere;
     }
 
-    public void setIdFiliere(Integer idFiliere) {
+    public void setIdFiliere(int idFiliere) {
         this.idFiliere = idFiliere;
     }
 
-
-
     public String getCode() {
-        return Code;
+        return code;
     }
 
     public void setCode(String code) {
-        Code = code;
+        this.code = code;
     }
 
     public String getLibelle() {
@@ -37,15 +36,6 @@ public class Filiere {
     }
 
     public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public Filiere() {
-    }
-
-    public Filiere(Integer idFiliere, String code, String libelle) {
-        this.idFiliere = idFiliere;
-        Code = code;
         this.libelle = libelle;
     }
 }

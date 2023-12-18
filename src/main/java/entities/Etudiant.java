@@ -1,25 +1,31 @@
 package entities;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Etudiant {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "idEtudiant", nullable = false)
     private int idEtudiant;
+
+    @Basic
+    @Column(name = "nom", nullable = false, length = 20)
     private String nom;
+
+    @Basic
+    @Column(name = "prenom", nullable = false, length = 20)
     private String prenom;
+
+    @Basic
+    @Column(name = "cne", nullable = false, length = 20)
     private String cne;
+
+    @ManyToOne
+    @JoinColumn(name = "filiere", nullable = false)
     private Filiere filiere;
 
-    @Override
-    public String toString() {
-        return "Etudiant{" +
-                "idEtudiant=" + idEtudiant +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", cne='" + cne + '\'' +
-                ", filiere=" + filiere +
-                '}';
-    }
-
-    public Etudiant() {
-    }
+    // Getters and setters
 
     public int getIdEtudiant() {
         return idEtudiant;
@@ -53,20 +59,11 @@ public class Etudiant {
         this.cne = cne;
     }
 
-
     public Filiere getFiliere() {
         return filiere;
     }
 
     public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
-    }
-
-    public Etudiant(int idEtudiant, String nom, String prenom, String cne, Filiere filiere) {
-        this.idEtudiant = idEtudiant;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.cne = cne;
         this.filiere = filiere;
     }
 }

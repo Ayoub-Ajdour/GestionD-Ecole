@@ -16,6 +16,7 @@ public class FiliereServiceImpl implements FiliereService {
     }
 
     public List<Filiere> getSortedFilieres() {
+
         List<Filiere> filieres = this.dao.getAll();
         System.out.println("Filiere :" + filieres.size());
         Collections.sort(filieres, new Comparator<Filiere>() {

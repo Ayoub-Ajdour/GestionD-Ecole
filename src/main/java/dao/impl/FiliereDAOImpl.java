@@ -1,75 +1,64 @@
 package dao.impl;
 
-import dao.ConnectionTool;
 import dao.FiliereDAO;
 import entities.Filiere;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import unity.HibernateUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
-public class FiliereDAOImpl extends ConnectionTool implements FiliereDAO {
-    private static Connection connexion = getConnexion();
+public class FiliereDAOImpl extends HibernateUtil implements FiliereDAO {
+    private Session s=null;
+    Transaction tx=null;
 
     public FiliereDAOImpl() {
     }
 
     @Override
     public Filiere getByCode(String code) {
-        if (this.connexion == null) {
-            return null;
-        } else {
-            try {
-                PreparedStatement ps = this.connexion.prepareStatement("select * from filiere where code = ?");
-                ps.setString(1, code);
-                ResultSet rs = ps.executeQuery();
-                Filiere filiere = null;
-                if (rs.next()) {
-                    filiere = new Filiere();
-                    filiere.setIdFiliere(rs.getInt(1));
-                    filiere.setCode(rs.getString(2));
-                    filiere.setLibelle(rs.getString(3));
-                }
 
-                rs.close();
-                ps.close();
-                System.out.println("filiere by code ok");
-                return filiere;
-            } catch (SQLException var5) {
-                System.out.println("probleme filiere by code " + var5.getMessage());
-                return null;
-            }
+        try (Session session = HibernateUtil.getSession()) {
+            tx = session.beginTransaction();
+
+            String hql = "FROM Filiere WHERE code = :code";
+            Query<Filiere> query = session.createQuery(hql, Filiere.class);
+            query.setParameter("code", code);
+            Filiere filiere = query.uniqueResult();
+            tx.commit();
+
+            return filiere;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
     public boolean create(Filiere filiere) {
-        if (this.connexion != null && filiere != null) {
-            try {
-                PreparedStatement ps = this.connexion.prepareStatement("insert into filiere (code, libelle) values (?,?)", 1);
-                ps.setString(1, filiere.getCode());
-                ps.setString(2, filiere.getLibelle());
-                ps.executeUpdate();
-                ResultSet rs = ps.getGeneratedKeys();
-                filiere.setIdFiliere(rs.getInt(1));
-                rs.close();
-                ps.close();
-                System.out.println("filiere bien ajoute");
-                return true;
-            } catch (SQLException var4) {
-                System.out.println("probleme ajout filiere" + var4.getMessage());
-                return false;
-            }
-        } else {
+
+        try{
+        s= HibernateUtil.getSession();
+        tx=s.beginTransaction();
+        s.save(filiere);
+        tx.commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+            System.out.println("pb insert fl "+e.getMessage());
             return false;
+        }finally {
+            s.close();
         }
+
+        return true;
     }
     @Override
     public boolean saveOrUpdate(Filiere filiere) {
-        if (this.connexion != null && filiere != null) {
+
+        if (filiere != null) {
             return this.getById(filiere.getIdFiliere()) != null ? this.update(filiere) : this.create(filiere);
         } else {
             return false;
@@ -78,98 +67,72 @@ public class FiliereDAOImpl extends ConnectionTool implements FiliereDAO {
 
     @Override
     public boolean update(Filiere filiere) {
-        if (this.connexion != null && filiere != null) {
-            try {
-                PreparedStatement ps = this.connexion.prepareStatement("update filiere set code = ? , libelle = ? where idFiliere = ?");
-                ps.setString(1, filiere.getCode());
-                ps.setString(2, filiere.getLibelle());
-                ps.setInt(3, filiere.getIdFiliere());
-                ps.executeUpdate();
-                ps.close();
-                System.out.println("filiere bien modifie");
-                return true;
-            } catch (SQLException var3) {
-                System.out.println("probleme mfd filiere" + var3.getMessage());
-                return false;
-            }
-        } else {
+
+        try{
+            s= HibernateUtil.getSession();
+            tx=s.beginTransaction();
+            s.update(filiere);
+            tx.commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+            System.out.println("pb update fl "+e.getMessage());
             return false;
+        }finally {
+            s.close();
         }
+
+        return true;
     }
 
     @Override
     public boolean delete(Filiere filiere) {
-        if (this.connexion != null && filiere != null) {
-            try {
-                PreparedStatement ps = this.connexion.prepareStatement("delete from filiere where idFiliere = ?");
-                ps.setInt(1, filiere.getIdFiliere());
-                ps.executeUpdate();
-                ps.close();
-                System.out.println("filiere bien supprime");
-                return true;
-            } catch (SQLException var3) {
-                System.out.println("probleme suppression de filiere " + var3.getMessage());
-                return false;
-            }
-        } else {
+
+        try{
+            s= HibernateUtil.getSession();
+            tx=s.beginTransaction();
+            s.delete(filiere);
+            tx.commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+            System.out.println("pb delete fl "+e.getMessage());
             return false;
+        }finally {
+            s.close();
         }
+
+        return true;
     }
 
     @Override
     public Filiere getById(Integer id) {
-        if (connexion != null && id != null) {
-            try {
-                PreparedStatement ps = connexion.prepareStatement("select * from filiere where idFiliere = ?");
-                ps.setInt(1, id);
-                ResultSet rs = ps.executeQuery();
-                Filiere filiere = null;
-                if (rs.next()) {
-                    filiere = new Filiere();
-                    filiere.setIdFiliere(rs.getInt(1));
-                    filiere.setCode(rs.getString(2));
-                    filiere.setLibelle(rs.getString(3));
-                }
+        try (Session session = HibernateUtil.getSession()) {
 
-                rs.close();
-                ps.close();
-                System.out.println("filiere by id ok");
-                return filiere;
-            } catch (SQLException var5) {
-                System.out.println("probleme filiere by id " + var5.getMessage());
-                return null;
-            }
-        } else {
+            Transaction transaction = session.beginTransaction();
+            Filiere filiere = session.get(Filiere.class, id);
+            transaction.commit();
+            return filiere;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
 
     @Override
     public List<Filiere> getAll() {
-        if (this.connexion == null) {
-            return null;
-        } else {
-            try {
-                PreparedStatement ps = this.connexion.prepareStatement("select * from filiere");
-                ResultSet rs = ps.executeQuery();
-                List<Filiere> filieres = new ArrayList();
+        try  {
+            s = HibernateUtil.getSession();
+            Query<Filiere> query = s.createQuery("from Filiere", Filiere.class);
+            List<Filiere> filieres = query.list();
 
-                while(rs.next()) {
-                    Filiere filiere = new Filiere();
-                    filiere.setIdFiliere(rs.getInt(1));
-                    filiere.setCode(rs.getString(2));
-                    filiere.setLibelle(rs.getString(3));
-                    filieres.add(filiere);
-                }
+            System.out.println(filieres.toString());
 
-                rs.close();
-                ps.close();
-                System.out.println("filiere all okey");
-                return filieres;
-            } catch (SQLException var5) {
-                System.out.println("probleme filiere all " + var5.getMessage());
-                return null;
-            }
+            return filieres;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            System.out.println("eroorr f affichage "+e.getMessage());
+            return Collections.emptyList();
         }
+
     }
-}
+    }
+

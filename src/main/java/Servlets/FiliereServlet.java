@@ -19,7 +19,8 @@ public class FiliereServlet extends HttpServlet {
     public FiliereServlet() {
     }
 
-    protected void doGet(jakarta.servlet.http.HttpServletRequest req, jakarta.servlet.http.HttpServletResponse resp) throws jakarta.servlet.ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         FiliereBean filiereBean = (FiliereBean)req.getSession().getAttribute("filiereBean");
         FiliereDAO filiereDao = new FiliereDAOImpl();
         filiereBean.getFiliere().setCode(req.getParameter("code"));

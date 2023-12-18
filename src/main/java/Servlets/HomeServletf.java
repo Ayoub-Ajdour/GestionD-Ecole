@@ -17,7 +17,7 @@ public class HomeServletf extends HttpServlet {
     public HomeServletf() {
     }
 
-    protected void doGet(jakarta.servlet.http.HttpServletRequest req, jakarta.servlet.http.HttpServletResponse resp) throws jakarta.servlet.ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("etudiantBean") == null) {
             req.getSession().setAttribute("etudiantBean", new EtudiantBean());
             req.getSession().setAttribute("filiereBean", new FiliereBean());

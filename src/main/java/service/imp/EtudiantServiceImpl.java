@@ -3,7 +3,6 @@ package service.imp;
 import dao.EtudiantDAO;
 import dao.impl.EtudiantDAOImpl;
 import entities.Etudiant;
-import entities.Filiere;
 import service.EtudiantService;
 
 import java.util.Collections;

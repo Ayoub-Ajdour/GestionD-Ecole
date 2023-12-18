@@ -7,7 +7,6 @@ import dao.FiliereDAO;
 import dao.impl.EtudiantDAOImpl;
 import dao.impl.FiliereDAOImpl;
 import entities.Etudiant;
-import entities.Filiere;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
