@@ -4,9 +4,9 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="entities.Filiere" table="filiere" schema="fpl2023">
+    <class name="com.entities.Filiere" table="filiere" schema="fpl2023">
         <id name="idFiliere">
-            <column name="idFiliere" sql-type="int"/>
+            <column name="idFiliere" sql-type="int(11)"/>
         </id>
         <property name="code">
             <column name="Code" sql-type="varchar(50)" length="50"/>
@@ -14,5 +14,11 @@
         <property name="libelle">
             <column name="libelle" sql-type="varchar(50)" length="50"/>
         </property>
+        <set name="etudiantsByIdFiliere" inverse="true">
+            <key>
+                <column name="filiere"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.entities.Etudiant"/>
+        </set>
     </class>
 </hibernate-mapping>
